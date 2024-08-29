@@ -37,11 +37,18 @@ class MarkovMachine {
 
   makeText(numWords = 100) {
     // TODO
+    let keys = Array.from(this.chains.keys());
+    let key = keys[Math.floor(Math.random() * keys.length)];
+    let output = [];
+
+    while (output.length < numWords && key !== null) {
+      output.push(key);
+      let nextWord = this.chains.get(key);
+      key = nextWord[Math.floor(Math.random() * nextWord.length)];
+    }
+
+    return output.join(" ");
   }
 }
 
-
-/* const text = "the cat in the hat";
-const markovMachine = new MarkovMachine(text);
-const chains = markovMachine.makeChains(); */
 module.exports = MarkovMachine;
